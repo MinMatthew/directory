@@ -176,7 +176,7 @@ html.paused *, html.paused *::before, html.paused *::after { animation-play-stat
   object-fit: cover;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
-.app-text { display: flex; flex-direction: column; gap: calc(0.6 * var(--u)); min-width: 0; color: #000; }
+.app-text { display: flex; flex-direction: column; gap: calc(0.6 * var(--u)); min-width: 0; color: var(--ink); }
 .app-name { font-size: calc(6.6 * var(--u)); line-height: 1.15; font-weight: 400; }
 .app-desc { font-size: calc(3.2 * var(--u)); line-height: 1.35; }
 .app a:active { opacity: 0.6; }

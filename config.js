@@ -15,8 +15,8 @@ export const CONFIG = {
   // when the phone gives no location. minDay/maxDay keep polar latitudes usable.
   season: { refSunrise: 6.5, refSunset: 19.5, noon: 13, fallbackLatitude: 35, minDay: 5, maxDay: 19 },
 
-  // Text colour follows the lower sky: dark ink on bright sky, light ink on dark sky.
-  ink: { dark: '#0a0a0a', light: '#f3f6ff', lumaDark: 0.5, lumaLight: 0.25 },
+  // Text colour follows the lower sky: black on bright sky, white on dark sky (switches at light = 0.5).
+  ink: { dark: '#000000', light: '#ffffff', lumaDark: 0.5, lumaLight: 0.25 },
 
   // Portrait scroll speeds of the header parts relative to the list (1 = same speed, >1 faster, <1 slower).
   hero: { textSpeed: 1.7, boxSpeed: 1, logoSpeed: 0.25 },

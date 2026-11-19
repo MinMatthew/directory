@@ -50,8 +50,6 @@ export function startSky(config) {
   const speedParam = parseFloat(params.get('speed'));
   const hasHour = Number.isFinite(hourParam);
   const speed = Number.isFinite(speedParam) && speedParam > 0 ? speedParam : 1;
-  const inkDark = hexToRgb(config.ink.dark);
-  const inkLight = hexToRgb(config.ink.light);
 
   const localHour = () => {
     const d = new Date();
@@ -78,7 +76,7 @@ export function startSky(config) {
     style.setProperty('--cloud-tint', rgbToHex(p.cloud));
     style.setProperty('--cloud-opacity', p.brightness.toFixed(3));
     style.setProperty('--stars-opacity', p.stars.toFixed(3));
-    style.setProperty('--ink', rgbToHex(lerpRgb(inkDark, inkLight, light)));
+    style.setProperty('--ink', light < 0.5 ? config.ink.dark : config.ink.light);
     if (themeMeta) themeMeta.content = rgbToHex(p.top);
   };
 

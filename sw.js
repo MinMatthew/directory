@@ -1,4 +1,4 @@
-const CACHE = 'directory-v14';
+const CACHE = 'directory-v15';
 const ASSETS = [
   './',
   './index.html',
