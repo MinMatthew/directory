@@ -10,6 +10,11 @@ export const CONFIG = {
     { hour: 21,   top: '#0b1430', bottom: '#1d2b57', cloud: '#8a9bb8', brightness: 0.5, stars: 0.85 },
   ],
 
+  // Seasonal day length. refSunrise/refSunset are the keyframe hours that mark sunrise/sunset;
+  // noon is the clock hour at the middle of the day. fallbackLatitude is used (signed by hemisphere)
+  // when the phone gives no location. minDay/maxDay keep polar latitudes usable.
+  season: { refSunrise: 6.5, refSunset: 19.5, noon: 13, fallbackLatitude: 35, minDay: 5, maxDay: 19 },
+
   // Text colour follows the lower sky: dark ink on bright sky, light ink on dark sky.
   ink: { dark: '#0a0a0a', light: '#f3f6ff', lumaDark: 0.5, lumaLight: 0.25 },
 

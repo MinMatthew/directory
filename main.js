@@ -78,7 +78,8 @@ function setupHeroFade() {
     for (const { el, speed, from, to } of parts) {
       const p = Math.min(1, Math.max(0, (y / range - from) / (to - from)));
       el.style.opacity = fixed ? '' : String(1 - p);
-      el.style.transform = fixed || speed === 1 ? '' : `translate3d(0, ${((1 - speed) * y).toFixed(1)}px, 0)`;
+      // The hero is position: fixed, so it only ever moves up (y is clamped at 0 during overscroll).
+      el.style.transform = fixed ? '' : `translate3d(0, ${(-speed * y).toFixed(1)}px, 0)`;
     }
   };
   const schedule = () => {

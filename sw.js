@@ -1,4 +1,4 @@
-const CACHE = 'directory-v13';
+const CACHE = 'directory-v14';
 const ASSETS = [
   './',
   './index.html',
@@ -8,6 +8,7 @@ const ASSETS = [
   './config.js',
   './clouds.js',
   './sky.js',
+  './season.js',
   './manifest.webmanifest',
   './assets/logo.png',
   './assets/icon-192.png',

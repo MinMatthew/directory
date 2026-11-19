@@ -1,5 +1,7 @@
 // Time-of-day palette interpolation -> CSS variables on :root.
 
+import { initLatitude, toReferenceHour } from './season.js';
+
 const hexToRgb = (hex) => {
   const n = parseInt(hex.slice(1), 16);
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
@@ -68,7 +70,7 @@ export function startSky(config) {
   let timer = null;
 
   const apply = () => {
-    const p = samplePalette(config.keyframes, currentHour());
+    const p = samplePalette(config.keyframes, toReferenceHour(currentHour(), config));
     const light = clamp01((config.ink.lumaDark - luma(p.bottom)) / (config.ink.lumaDark - config.ink.lumaLight));
     const style = root.style;
     style.setProperty('--sky-top', rgbToHex(p.top));
@@ -98,6 +100,8 @@ export function startSky(config) {
     root.style.transitionDuration = `${fadeMs}ms`;
   }));
   if (!hasHour || speed !== 1) timer = setInterval(apply, interval);
+
+  initLatitude(apply);
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
