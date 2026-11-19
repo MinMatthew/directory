@@ -1,0 +1,18 @@
+{
+  "id": "./",
+  "name": "Directory — MAtt's Toy Workshop",
+  "short_name": "Directory",
+  "description": "A directory of MAtt's Toy Workshop PWA apps and links",
+  "lang": "en",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b1430",
+  "theme_color": "#4a90e2",
+  "icons": [
+    { "src": "./assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
