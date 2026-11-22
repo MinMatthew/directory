@@ -11,8 +11,8 @@ export const CONFIG = {
   ],
 
   // Seasonal day length. refSunrise/refSunset are the keyframe hours that mark sunrise/sunset;
-  // noon is the clock hour at the middle of the day. fallbackLatitude is used (signed by hemisphere)
-  // when the phone gives no location. minDay/maxDay keep polar latitudes usable.
+  // noon is the clock hour at the middle of the day. Latitude is fixed to fallbackLatitude
+  // (signed by the time-zone hemisphere); no location permission is requested. minDay/maxDay clamp day length.
   season: { refSunrise: 6.5, refSunset: 19.5, noon: 13, fallbackLatitude: 35, minDay: 5, maxDay: 19 },
 
   // Text colour follows the lower sky: black on bright sky, white on dark sky (switches at light = 0.5).

@@ -1,6 +1,6 @@
 // Time-of-day palette interpolation -> CSS variables on :root.
 
-import { initLatitude, toReferenceHour } from './season.js';
+import { toReferenceHour } from './season.js';
 
 const hexToRgb = (hex) => {
   const n = parseInt(hex.slice(1), 16);
@@ -98,8 +98,6 @@ export function startSky(config) {
     root.style.transitionDuration = `${fadeMs}ms`;
   }));
   if (!hasHour || speed !== 1) timer = setInterval(apply, interval);
-
-  initLatitude(apply);
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {

@@ -1,7 +1,6 @@
 // Seasonal day length: stretches/squeezes the keyframe day so winter nights are long and summer days are long.
 
 const RAD = Math.PI / 180;
-const LAT_KEY = 'directory.lat';
 
 const SOUTH_TZ = /^(Australia|Antarctica)\/|^Pacific\/(Auckland|Chatham|Fiji|Tongatapu|Apia|Pago_Pago|Tahiti|Noumea|Port_Moresby|Guadalcanal|Efate|Rarotonga|Niue|Norfolk)$|^America\/(Sao_Paulo|Santiago|Montevideo|Asuncion|La_Paz|Lima|Cuiaba|Campo_Grande|Bahia|Fortaleza|Recife|Manaus|Belem|Argentina\/.*|Buenos_Aires|Cordoba|Punta_Arenas)$|^Africa\/(Johannesburg|Maseru|Mbabane|Windhoek|Harare|Lusaka|Maputo|Luanda|Lubumbashi|Gaborone|Blantyre|Kinshasa|Brazzaville|Dar_es_Salaam|Nairobi)$|^Indian\/(Antananarivo|Mauritius|Reunion|Comoro|Mayotte)$|^Asia\/Jakarta$/;
 
@@ -17,34 +16,16 @@ function isSouthernHemisphere() {
   }
 }
 
+// No location permission is requested: the hemisphere comes from the device time zone.
 let latitude = null;
 
 export function getLatitude(config) {
-  if (latitude !== null) return latitude;
-  return isSouthernHemisphere() ? -config.season.fallbackLatitude : config.season.fallbackLatitude;
-}
-
-// Calls onChange() once a real latitude is known (cached value first, then a fresh fix).
-export function initLatitude(onChange) {
-  const forced = parseFloat(new URLSearchParams(location.search).get('lat'));
-  if (Number.isFinite(forced)) {
-    latitude = Math.max(-90, Math.min(90, forced));
-    return;
+  if (latitude === null) {
+    const forced = parseFloat(new URLSearchParams(location.search).get('lat')); // debug override
+    const fallback = config.season.fallbackLatitude;
+    latitude = Number.isFinite(forced) ? Math.max(-90, Math.min(90, forced)) : isSouthernHemisphere() ? -fallback : fallback;
   }
-  try {
-    const cached = parseFloat(localStorage.getItem(LAT_KEY));
-    if (Number.isFinite(cached)) latitude = cached;
-  } catch {}
-  if (!('geolocation' in navigator)) return;
-  navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      latitude = pos.coords.latitude;
-      try { localStorage.setItem(LAT_KEY, String(latitude)); } catch {}
-      onChange();
-    },
-    () => {},
-    { enableHighAccuracy: false, maximumAge: 24 * 3600 * 1000, timeout: 15000 },
-  );
+  return latitude;
 }
 
 function dayOfYear(d) {
